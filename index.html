@@ -1,0 +1,136 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src = "node_modules/backbone/node_modules/underscore/underscore.js"></script>
+    <script src = "node_modules/backbone/backbone-min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+   
+
+
+
+
+
+    <script>/*
+
+    $(document).ready(function(){
+    var firstResponse;
+    var nextPage;
+    var pagination;
+    var csvFile = new Array();
+    pagination = 20;
+    firstResponse = 'https://represent.opennorth.ca/representatives/house-of-commons/?limit=400';
+   // console.log('pagination before click' + pagination);
+   
+    response= firstResponse;
+    
+       $('#more-mps').on('click', function(){
+       // alert();
+            
+            response = 'https://represent.opennorth.ca/representatives/house-of-commons/?limit=20&offset='+pagination;
+          //  console.log(response);
+            getData(response);
+            pagination = pagination+20;
+            console.log('pagination after load' + pagination);
+        });
+
+       function getData(){
+        $.getJSON( response, function( data ) {
+            //console.log(data.objects);
+          $.each( data.objects, function( key, val ) {
+           // console.log(val.email);
+            csvFile[key] = val.email;
+            $('#emails').append('<li>' + val.email + '</li>');
+            });
+          });
+        console.log(csvFile);
+        }
+ 
+        getData();
+    });*/
+    </script>
+
+    <script>
+    var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+var csvContent = "data:text/csv;charset=utf-8,";
+data.forEach(function(infoArray, index){
+
+   dataString = infoArray.join(",");
+   csvContent += index < data.length ? dataString+ "\n" : dataString;
+
+   var encodedUri = encodeURI(csvContent);
+//window.open(encodedUri);
+
+}); 
+    </script>
+        <script type="text/template" id="search_template">
+        
+        <div class="member">
+        <h2><%= name %></h2>
+        <p><img width= "40" src="<%= photo_url %>"/></p>
+        <p><%= email %></p>
+        <p><strong><%= party_name %> <%= elected_office %>, <%= district_name %></strong>
+
+
+        <% _.each(offices, function(office){ %>
+            <h4><%= office.type %> Office</h4>
+            Fax: <%= office.fax %>
+            Mailing: <%= office.postal %>
+            Phone: <%= office.tel %>
+
+
+        <% }); %>    
+        </div>    
+<hr>
+
+
+
+</script>
+    </head>
+<body>
+
+<div id="search_container"></div>
+
+
+
+<div id="mpname"></div>
+<!--
+    <div class="btn-group" role="group" aria-label="...">
+    <a class="btn btn-default" href="#">I want to see everything!</a>
+    <a class="btn btn-default" href="#">I only want to see Cabinet members</a>
+    <a class="btn btn-default" href="#">Show me emails</a>
+    <a class="btn btn-default" href="#">Show me phone numbers</a>
+    <a class="btn btn-default" href="#">Show me mailing addresses</a>
+    <a class="btn btn-default" href="#">Show me social media accounts</a>
+    <a class="btn btn-default" href="#">Show me profile information</a>
+   
+
+
+    <select class="form-control">
+        <option>Show me the minister of</option>
+    </select>
+    <select class="form-control">
+        <option>Filter by Party</option>
+        <option>Liberals (120)</option>
+        <option>Conservatives (XX)</option>
+        <option>NDP(XX) </option>
+        <option>Green Party (1)</option>
+        <option> Partie Quebecois(2)</option>
+    </select>
+    </div>
+    <div>
+
+    <ul id='emails'>
+        
+    </ul>
+    <button id="more-mps">MORE!</button>
+</div>
+--><!--
+    <script src = "assets/csvGen/models.js"></script>
+    <script src = "assets/csvGen/collections.js"></script>
+    <script src = "assets/csvGen/views.js"></script>
+    <script src = "assets/csvGen/router.js"></script>-->
+    <script src = "assets/csvGen/app.js"></script>
+    </body>
+
+</html>
