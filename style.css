@@ -6732,16 +6732,6 @@ button.close {
     display: none !important;
   }
 }
-.member {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-  height: 500px;
-}
-@media (min-width: 992px) {
-  .member {
-    float: left;
-    width: 25%;
-  }
+td {
+  font-size: 10px;
 }

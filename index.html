@@ -68,49 +68,72 @@ data.forEach(function(infoArray, index){
     <button>Show emails</button>
     <button>Show phone numbers</button>
     <button>Download a CSV of the data from this search</button>
+       <table class="table table-striped">
+        <tbody>
+        <tr>
+        <th>Name</th>
+        <th>Riding</th>
+        <th>Party</th>
+        <th>Email</th>
+        <th>Legislative Fax</th>
+        <th>Legislative Mailing</th>
+        <th>Legislative Phone</th>
+        <th>Constituency Fax</th>
+        <th>Constituency Mailing</th>
+        <th>Constituency Phone</th>
+
+        </tr>
         <script type="text/template" id="search_template">
         
 
-        <div class="member">
-        <h2><%= name %></h2>
+        <tr>
+
+        
+        <td><%= name %></td>
+         <td><p><strong><%= district_name %></strong></td>
+        <td>
         <p>
-        <img width= "40" src="<%= photo_url %>"/>
+        
         <% if (party_name == "NDP") { %>
-        <img height="40" src="images/ndp-logo.png"/>
+        <img height="10" src="images/ndp-logo.png"/>
         <% } %>
         <% if (party_name == "Liberal") { %>
-        <img height="40" src="images/liberal-logo.png"/>
+        <img height="10" src="images/liberal-logo.png"/>
         <% } %>
         <% if (party_name == "Conservative") { %>
-        <img height="40" src="images/conservative-logo.png"/>
+        <img height="10" src="images/conservative-logo.png"/>
         <% } %>
         <% if (party_name == "Green") { %>
-        <img height="40" src="images/green-logo.gif"/>
+        <img height="10" src="images/green-logo.gif"/>
         <%}%>
         <% if (party_name == "Bloc Québécois") { %>
-        <img height="40" src="images/bloc-logo.png"/>
+        <img height="10" src="images/bloc-logo.png"/>
         <%}%>
 
 
         </p>
-        <p><%= email %></p>
-        <p><strong><%= party_name %> <%= elected_office %>, <%= district_name %></strong>
+        </td>
+        <td><p><%= email %></p></td>
+       
 
 
         <% _.each(offices, function(office){ %>
-            <h4><%= office.type %> Office</h4>
-            Fax: <%= office.fax %>
-            Mailing: <%= office.postal %>
-            Phone: <%= office.tel %>
+           
+            <td><%= office.type %> Fax: <%= office.fax %></td>
+            <td><%= office.type %> Mailing: <%= office.postal %></td>
+           <td><%= office.type %> Phone: <%= office.tel %></td>
 
 
         <% }); %>    
-        </div>    
-
+        
+        </tr>
+    
 
 
 
 </script>
+</tbody>
+    </table>
     </head>
 <body>
 
