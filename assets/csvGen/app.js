@@ -18,12 +18,8 @@ app.MemberListCollection = Backbone.Collection.extend({
        return response.objects;
     },
 
-    filterMembers: function(){
-        //user selects the party
-        //party name gets passed to backbone
-        //backbone filters
-        //returns new array of filtered data
-
+     comparator: function(item) { 
+        return item.get('last_name').toLowerCase(); 
     }
 });
 
@@ -63,6 +59,7 @@ app.MemberListView = Backbone.View.extend({
         "change #party-filter" : "requestedParty"
     },
     fetchSuccess: function (collection, response) {
+
         //loop through returned collection
         collection.each(function(model){
             //generate a single member view for each
@@ -134,6 +131,10 @@ app.MemberListView = Backbone.View.extend({
 
        
     }, 
+
+    requestedRiding: function(){
+        
+    },
     fetchError: function (collection, response) {
         throw new Error("error");
     },
@@ -160,9 +161,12 @@ var memberListView = new app.MemberListView({model: memberSingleModel, collectio
 
 
 
-
-
-
+$('#riding-filter').keypress( function () {
+    var year = $("#riding-filter").val();
+    console.log(year);
+    //look at current collection
+    //find whatever is in the field
+}).change();
 
 
 
