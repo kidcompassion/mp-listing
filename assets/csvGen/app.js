@@ -104,17 +104,22 @@ app.MemberListView = Backbone.View.extend({
     },*/
     requestedParty: function(){
         this.$el.find('.data_row').empty();
+        var filteredPartyData;
         var filter = this.$el.find('#party-filter');
         var partySelected = filter.val();
-        var filteredPartyData = memberListCollection.where({party_name: partySelected});
-       // this.collection.remove();
 
-        filteredView = this.collection.reset(filteredPartyData);
+        if (partySelected === 'Reset'){
+            console.log('reset'); 
+            filteredPartyData = this.collection.models;
+            console.log(filteredPartyData);
+        } else {
+
+            filteredPartyData = this.collection.where({party_name: partySelected});
+        }
+       // filteredView = this.collection.reset(filteredPartyData);
        
-
-       this.collection = new app.MemberListCollection(filteredView);
-    // console.log(this.collection);
-        this.collection.each(function(model){
+        filteredList = new app.MemberListCollection(filteredPartyData);
+        filteredList.each(function(model){
 
             //generate a single member view for each
             memberSingleView = new app.MemberSingleView({model:model});
@@ -123,6 +128,7 @@ app.MemberListView = Backbone.View.extend({
       //  this.$el.append(filteredView.render().el);
         
 //console.log(filteredPartyData);
+
         return this;
         
 
