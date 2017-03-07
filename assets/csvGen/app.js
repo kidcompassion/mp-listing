@@ -17,18 +17,29 @@ app.MemberListCollection = Backbone.Collection.extend({
         //Where i define how the data looks - models will be mpty unless you return this value
        return response.objects;
     },
+
+    filterMembers: function(){
+        //user selects the party
+        //party name gets passed to backbone
+        //backbone filters
+        //returns new array of filtered data
+
+    }
 });
 
 
 
 app.MemberSingleView = Backbone.View.extend({
-    el: '#search_container',
+    el: '.data_row',
     tagName: 'div',
-    template: _.template($('#search_template').html()),
+    template: _.template($('#data_template').html()),
     initialize: function(){
         this.render();
+       // console.log(this.$el.find('#party-filter'));
 
     },
+
+
     render: function(){
         //console.log(this.model);
         this.$el.append(this.template(this.model.attributes));
@@ -38,34 +49,92 @@ app.MemberSingleView = Backbone.View.extend({
 
 
 app.MemberListView = Backbone.View.extend({
-    el: '.search_container',
-    tagName: 'div',
+    el: '.data_container',
     initialize: function(){
         this.collection.fetch({
             success: this.fetchSuccess,
             error: this.fetchError
-
         });
+        
+        
+    },
+
+    events: {
+        "change #party-filter" : "requestedParty"
     },
     fetchSuccess: function (collection, response) {
-       
-        console.log('Collection fetch success', response);
-        console.log('Collection models: ', collection.models);
         //loop through returned collection
         collection.each(function(model){
             //generate a single member view for each
             memberSingleView = new app.MemberSingleView({model:model});
-            console.log(model); 
+          //  console.log(model); 
         });
+
         return this;
 
-    },
+        console.log('logged');
+       
 
+    },
+/*
+    getParties: function () {
+      //  console.log(this.collection.pluck("party_name"));
+        return _.uniq(this.collection.pluck("party_name"), false, function (type) {
+            return type.toLowerCase();
+            console.log(type.toLowerCase());
+        });
+    },
+    createSelect: function () {
+      //  console.log(this.getParties);
+       // var filter = this.el.find("#party-filter"),
+        
+            select = $("<select/>", {
+                html: "<option>All</option>"
+            });
+            console.log(filter);
+     
+        _.each(this.getParties(), function (item) {
+            console.log(item);
+            var option = $("<option/>", {
+                value: item.toLowerCase(),
+                text: item.toLowerCase()
+            }).appendTo(filter);
+        });
+        return filter;
+    },*/
+    requestedParty: function(){
+        this.$el.find('.data_row').empty();
+        var filter = this.$el.find('#party-filter');
+        var partySelected = filter.val();
+        var filteredPartyData = memberListCollection.where({party_name: partySelected});
+       // this.collection.remove();
+
+        filteredView = this.collection.reset(filteredPartyData);
+       
+
+       this.collection = new app.MemberListCollection(filteredView);
+    // console.log(this.collection);
+        this.collection.each(function(model){
+
+            //generate a single member view for each
+            memberSingleView = new app.MemberSingleView({model:model});
+          //  console.log(model); 
+        });
+      //  this.$el.append(filteredView.render().el);
+        
+//console.log(filteredPartyData);
+        return this;
+        
+
+       
+    }, 
     fetchError: function (collection, response) {
         throw new Error("error");
     },
     render: function(){
-        
+        //var filter = this.$el.find('#party-filter');
+        //filter.createSelect;
+        //console.log(this.$el.find('#party-filter'));
        // console.log(this.collection);
         return this;
     },
@@ -83,15 +152,6 @@ var memberListView = new app.MemberListView({model: memberSingleModel, collectio
 //memberSingleView = new app.MemberSingleView({model:memberSingleModel});
 
 
-
-
-
-$('#mpname').html(memberListView.render().el);
-
-
-//call view
-//view references collection
-//view only loads after data is returned
 
 
 

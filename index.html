@@ -64,26 +64,8 @@ data.forEach(function(infoArray, index){
 }); 
     </script>
 
-    <button>Filter by Party</button>
-    <button>Show emails</button>
-    <button>Show phone numbers</button>
-    <button>Download a CSV of the data from this search</button>
-       <table class="table table-striped">
-        <tbody>
-        <tr>
-        <th>Name</th>
-        <th>Riding</th>
-        <th>Party</th>
-        <th>Email</th>
-        <th>Legislative Fax</th>
-        <th>Legislative Mailing</th>
-        <th>Legislative Phone</th>
-        <th>Constituency Fax</th>
-        <th>Constituency Mailing</th>
-        <th>Constituency Phone</th>
 
-        </tr>
-        <script type="text/template" id="search_template">
+        <script type="text/template" id="data_template">
         
 
         <tr>
@@ -93,7 +75,6 @@ data.forEach(function(infoArray, index){
          <td><p><strong><%= district_name %></strong></td>
         <td>
         <p>
-        
         <% if (party_name == "NDP") { %>
         <img height="10" src="images/ndp-logo.png"/>
         <% } %>
@@ -103,7 +84,8 @@ data.forEach(function(infoArray, index){
         <% if (party_name == "Conservative") { %>
         <img height="10" src="images/conservative-logo.png"/>
         <% } %>
-        <% if (party_name == "Green") { %>
+        <% if (party_name == "Green Party") { %>
+
         <img height="10" src="images/green-logo.gif"/>
         <%}%>
         <% if (party_name == "Bloc Québécois") { %>
@@ -119,9 +101,10 @@ data.forEach(function(infoArray, index){
 
         <% _.each(offices, function(office){ %>
            
-            <td><%= office.type %> Fax: <%= office.fax %></td>
-            <td><%= office.type %> Mailing: <%= office.postal %></td>
-           <td><%= office.type %> Phone: <%= office.tel %></td>
+            <td>
+            <p><%= office.type %> Fax: <%= office.fax %></p>
+            <p><%= office.type %> Mailing: <%= office.postal %></p>
+           <p><%= office.type %> Phone: <%= office.tel %></td></p>
 
 
         <% }); %>    
@@ -132,52 +115,46 @@ data.forEach(function(infoArray, index){
 
 
 </script>
-</tbody>
-    </table>
+
     </head>
 <body>
-
-<div id="search_container"></div>
-
+<section class="controls">
 
 
-<div id="mpname"></div>
-<!--
-    <div class="btn-group" role="group" aria-label="...">
-    <a class="btn btn-default" href="#">I want to see everything!</a>
-    <a class="btn btn-default" href="#">I only want to see Cabinet members</a>
-    <a class="btn btn-default" href="#">Show me emails</a>
-    <a class="btn btn-default" href="#">Show me phone numbers</a>
-    <a class="btn btn-default" href="#">Show me mailing addresses</a>
-    <a class="btn btn-default" href="#">Show me social media accounts</a>
-    <a class="btn btn-default" href="#">Show me profile information</a>
-   
+        <button> Save these results as a .csv</button>
+</section>
 
 
-    <select class="form-control">
-        <option>Show me the minister of</option>
-    </select>
-    <select class="form-control">
-        <option>Filter by Party</option>
-        <option>Liberals (120)</option>
-        <option>Conservatives (XX)</option>
-        <option>NDP(XX) </option>
-        <option>Green Party (1)</option>
-        <option> Partie Quebecois(2)</option>
-    </select>
-    </div>
-    <div>
+</section>
+<section class="data">
+<table class="table table-striped" >
+        <tr>
+        <th>Name</th>
+        <th>Riding</th>
+        <th>Party</th>
+        <th>Email</th>
+        <th colspan="4">Offices</th>
 
-    <ul id='emails'>
-        
-    </ul>
-    <button id="more-mps">MORE!</button>
-</div>
---><!--
-    <script src = "assets/csvGen/models.js"></script>
-    <script src = "assets/csvGen/collections.js"></script>
-    <script src = "assets/csvGen/views.js"></script>
-    <script src = "assets/csvGen/router.js"></script>-->
+
+        </tr>
+    </table>
+    <div class="data_container">
+         <select id="party-filter">
+            <option value="Reset">Reset Filter</option>
+            <option value="Liberal">Liberal</option>
+            <option value="Conservative">Conservative</option>
+            <option value="NDP">NDP</option>
+            <option value="Bloc Québécois">Bloc Québécois</option>
+            <option value="Green Party">Green Party</option>
+         </select>
+    <table class="data_row" >
+    </tbody>
+</table>
+</section>
+
+
+
+
     <script src = "assets/csvGen/app.js"></script>
     </body>
 

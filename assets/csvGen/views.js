@@ -15,7 +15,7 @@ app.MemberSingleView = Backbone.View.extend({
   render: function(model){
 
     // this.$el.html('sally');
-     this.$el.html(this.template(this.model.attributes));
+     this.$el.append(this.template(this.model.attributes));
      console.log('model');
     return this;
    // this.$el.html( this.template(this.model.toJSON()));

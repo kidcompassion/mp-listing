@@ -6732,6 +6732,15 @@ button.close {
     display: none !important;
   }
 }
+section {
+  max-width: 90%;
+  float: none!important;
+  display: block;
+  margin: 0 auto;
+}
+.controls {
+  padding: 30px 0px;
+}
 td {
   font-size: 10px;
 }
