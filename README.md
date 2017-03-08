@@ -1,4 +1,4 @@
-# Canada MP Listing
+# Canadian MP Listing
 A simple, filterable, sortable listing of all Canadian MPs. Built with Backbone on Open North's Represent API. 
 
 #### Note for any new coders ####
