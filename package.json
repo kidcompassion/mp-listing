@@ -1,0 +1,26 @@
+{
+  "name": "mp-emails",
+  "version": "1.0.0",
+  "description": "Backbone application that filters Open North's Represent API",
+  "main": "Gulpfile.js",
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "gulp": "^3.9.1",
+    "bootstrap": "^3.3.7",
+    "gulp-less": "^3.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kidcompassion/mp-listing.git"
+  },
+  "author": "Sally Poulsen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kidcompassion/mp-listing/issues"
+  },
+  "homepage": "https://github.com/kidcompassion/mp-listing#readme"
+}

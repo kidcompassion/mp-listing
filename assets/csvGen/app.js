@@ -12,6 +12,7 @@ app.MemberListCollection = Backbone.Collection.extend({
     type: 'GET',
     parse: function (response) {
         //Where i define how the data looks - models will be mpty unless you return this value
+       console.log(response);
        return response.objects;
     },
      comparator: function(item) { 
