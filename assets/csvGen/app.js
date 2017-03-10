@@ -41,9 +41,14 @@ app.MemberListView = Backbone.View.extend({
             success: this.fetchSuccess,
             error: this.fetchError
         });
+        var userRiding ='boom';
     },
     events: {
-        "change #party-filter" : "requestedParty"
+        "change #party-filter" : "requestedParty",
+        "focus #riding-filter" : "ridingAutocomplete",
+        "click #riding-submit" : "requestedRiding",
+
+
     },
     fetchSuccess: function (collection, response) {
 
@@ -57,13 +62,13 @@ app.MemberListView = Backbone.View.extend({
     requestedParty: function(){
         this.$el.find('.data_row').empty();
         var filteredPartyData;
-        var filter = this.$el.find('#party-filter');
-        var partySelected = filter.val();
+        var partyFilter = this.$el.find('#party-filter');
+        var partySelected = partyFilter.val();
 
         if (partySelected === 'Reset'){
-            console.log('reset'); 
+            //console.log('reset'); 
             filteredPartyData = this.collection.models;
-            console.log(filteredPartyData);
+            //console.log(filteredPartyData);
         } else {
 
             filteredPartyData = this.collection.where({party_name: partySelected});
@@ -79,8 +84,65 @@ app.MemberListView = Backbone.View.extend({
     }, 
 
     requestedRiding: function(){
-        //TBD
+        
+        
+
+        if($('#riding-filter').is('[data-riding]')){
+        
+        this.$el.find('.data_row').empty();
+        var userRiding = $('#riding-filter').attr('data-riding');
+
+        console.log(userRiding);
+
+        filteredRidingData = this.collection.where({district_name : userRiding});
+      //  console.log(userRiding);
+       
+        filteredRidingList = new app.MemberListCollection(filteredRidingData);
+        filteredRidingList.each(function(model){
+            //generate a single member view for each
+            console.log(model);
+            memberSingleView = new app.MemberSingleView({model:model});
+        });
+        return this;
+    };
+        },
+           
+       ridingAutocomplete: function(userRiding){     
+            var ridings = new Array;
+          //  console.log(userRiding);
+            
+
+         
+            //create an array of ridings, so we can populate the autocomplete
+            $.each(this.collection.models, function(key, index){
+                ridings[key] = index.get('district_name');
+                console.log(index.get('district_name'));
+            });
+            //render the autocomplete
+            $( "#riding-filter" ).autocomplete({
+               source: ridings,
+              
+            });
+
+            $( "#riding-filter" ).on( "autocompleteselect", function( event, ui) {
+                userRiding = ui.item.value;
+                $('#riding-filter').attr('data-riding', userRiding);
+                
+               // console.log(this.requestedRiding);
+            } );
+
+            $('#riding-filter').on('onblur', function(){
+                alert();
+            });
+            
+            //on click, filter the models accordingly
+            //if userriding is populated
+
+
+
     },
+
+
     fetchError: function (collection, response) {
         throw new Error("error");
     },
