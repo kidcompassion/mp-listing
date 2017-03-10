@@ -1,10 +1,7 @@
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
    
@@ -48,15 +45,18 @@
                 <%}%>
             </p></td>
             <td><p><%= email %></p></td>
-       
-                <% _.each(offices, function(office){ %> //Loops through office data
-                    <td>
-                        <p><span class="office"><%= office.type %></span></p>
-                        <p> <strong>Phone:</strong> <%= office.tel %></p>
-                        <p> <strong>Fax:</strong> <%= office.fax %></p>
-                        <p> <strong>Address:</strong> <%= office.postal %></p>
-                    </td>
-                <% }); %>    
+
+            <td>
+                <% _.each(offices, function(office){ //Loops through office data %>
+                <p><span class="office"><%= office.type %></span></p>
+                <p> <strong>Phone:</strong> <%= office.tel %></p>
+                <p> <strong>Fax:</strong> <%= office.fax %></p>
+                <p> <strong>Address:</strong> <%= office.postal %></p>
+                <% if (office !== offices[offices.length-1]) { %>
+                    <hr>
+                <%}%>
+                <% }); %>
+            </td>
             </tr>
         </script>
     </head>
@@ -82,12 +82,16 @@
                  </select>
                  &nbsp;
                  <label>Filter by riding</label>
-                 <input id="riding-filter" type=""/><button id="riding-submit">reset</button>
+                 <input id="riding-filter" type=""/><button id="riding-submit">Find my MP</button>
                 <table class="table table-striped table-responsive">
                     <tbody class="data_row"></tbody>
                 </table>
             </div>
         </section>
-        <script src ="assets/csvGen/app.js"></script>
     </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+    <script src ="assets/csvGen/app.js"></script>
 </html>
