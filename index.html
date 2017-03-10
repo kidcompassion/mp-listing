@@ -46,15 +46,18 @@
                 <%}%>
             </p></td>
             <td><p><%= email %></p></td>
-       
-                <% _.each(offices, function(office){ %> //Loops through office data
-                    <td>
-                        <p><span class="office"><%= office.type %></span></p>
-                        <p> <strong>Phone:</strong> <%= office.tel %></p>
-                        <p> <strong>Fax:</strong> <%= office.fax %></p>
-                        <p> <strong>Address:</strong> <%= office.postal %></p>
-                    </td>
-                <% }); %>    
+
+            <td>
+                <% _.each(offices, function(office){ //Loops through office data %>
+                <p><span class="office"><%= office.type %></span></p>
+                <p> <strong>Phone:</strong> <%= office.tel %></p>
+                <p> <strong>Fax:</strong> <%= office.fax %></p>
+                <p> <strong>Address:</strong> <%= office.postal %></p>
+                <% if (office !== offices[offices.length-1]) { %>
+                    <hr>
+                <%}%>
+                <% }); %>
+            </td>
             </tr>
         </script>
     </head>
