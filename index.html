@@ -37,7 +37,6 @@
                     <img height="10" src="images/conservative-logo.png"/>
                 <% } %>
                 <% if (party_name == "Green Party") { %>
-
                     <img height="10" src="images/green-logo.gif"/>
                 <%}%>
                 <% if (party_name == "Bloc Québécois") { %>
@@ -62,7 +61,6 @@
     </head>
     <body>
         <section class="data">
-
             <div class="data_container">
                 <label>Filter by party</label>
                  <select id="party-filter">
@@ -70,22 +68,20 @@
                     <option value="Liberal">Liberal</option>
                     <option value="Conservative">Conservative</option>
                     <option value="NDP">NDP</option>
-                    <option value="Bloc Québécois">Bloc Québécois</option>
+A                    <option value="Bloc Québécois">Bloc Québécois</option>
                     <option value="Green Party">Green Party</option>
                  </select>
                  &nbsp;
                  <label>Filter by riding</label>
                  <input id="riding-filter" type=""/><button id="riding-submit">Find my MP</button>
-                       <table class="table table-striped">
-                <tr>
-                <th>Name</th>
-                <th>Riding</th>
-                <th>Party</th>
-                <th>Email</th>
-                <th colspan="4">Offices</th>
-            </tr>
-            </table>
-                <table class="table table-striped table-responsive">
+                 <table class="table table-striped table-responsive">
+                    <tr>
+                        <th>Name</th>
+                        <th>Riding</th>
+                        <th>Party</th>
+                        <th>Email</th>
+                        <th>Offices</th>
+                    </tr>
                     <tbody class="data_row"></tbody>
                 </table>
             </div>
