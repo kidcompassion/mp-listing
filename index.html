@@ -1,10 +1,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="style.css">
-   
+
         <script>
             //This generates a csv of provided data)
             var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
@@ -20,9 +19,8 @@
         }); 
         </script>
 
-
         <script type="text/template" id="data_template">
-        
+
         <tr>
             <td><%= name %></td>
             <td><p><strong><%= district_name %></strong></td>
@@ -53,9 +51,9 @@
             <td>
                 <% _.each(offices, function(office){ //Loops through office data %>
                 <p><span class="office"><%= office.type %></span></p>
-                <p> <strong>Phone:</strong> <%= office.tel %></p>
-                <p> <strong>Fax:</strong> <%= office.fax %></p>
-                <p> <strong>Address:</strong> <%= office.postal %></p>
+                <p><strong>Phone:</strong> <%= office.tel %></p>
+                <p><strong>Fax:</strong> <%= office.fax %></p>
+                <p><strong>Address:</strong> <%= office.postal %></p>
                 <% if (office !== offices[offices.length-1]) { %>
                     <hr>
                 <%}%>
@@ -73,7 +71,7 @@
                     <option value="Liberal">Liberal</option>
                     <option value="Conservative">Conservative</option>
                     <option value="NDP">NDP</option>
-A                    <option value="Bloc Québécois">Bloc Québécois</option>
+A                   <option value="Bloc Québécois">Bloc Québécois</option>
                     <option value="Green Party">Green Party</option>
                  </select>
                  &nbsp;
