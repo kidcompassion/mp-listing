@@ -24,3 +24,4 @@ If you are interested in contributing to this project, but are intimidated by Gi
 
 - [ ] Add loading .gif
 
+- [ ] Add Independent and Ind\u00e9pendant to party list
