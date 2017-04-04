@@ -3,23 +3,34 @@ body {
 }
 
 section {
-    max-width: 90%;
-    float: none!important;
     display: block;
+    float: none !important;
+    font-size: 16px;
     margin: 0 auto;
+    max-width: 90%;
 }
 
+.filters {
+    padding: 15px 0px;
+}
+
+.filters label:not(:first-child) {
+    padding-left: 15px;
+}
+
+.filters button.btn.btn-primary {
+    margin-bottom: 3px;
+}
 
 .office {
-    text-transform: capitalize;
-    font-weight: bold;
+    text-transform: uppercase;
 }
+
 .controls {
     padding: 30px 0px;
 }
-td {
-    font-size: 10px;
-  //  .make-md-column(3);
-  // height: 500px;
+
+td img{
+    padding-right: 10px;
 }
 
