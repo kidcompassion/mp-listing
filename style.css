@@ -6733,7 +6733,7 @@ button.close {
   }
 }
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: serif;
 }
 section {
   display: block;
@@ -6765,6 +6765,7 @@ td img {
 /* Panel Styling */
 .panel-default {
   border: 3px solid #d71921;
+  border-radius: 10px;
 }
 .panel-default .panel-heading {
   display: flex;
@@ -6777,6 +6778,10 @@ td img {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
+.panel-default .panel-heading .panel-title {
+  font-size: 28px;
+  font-weight: 700;
+}
 .panel-default .panel-heading > div {
   position: absolute;
   left: 10px;
@@ -6785,14 +6790,57 @@ td img {
   max-height: 100%;
   height: 80%;
 }
-.panel-default .panel-heading > div .panel-title {
-  font-size: 28px;
-  font-weight: 700;
-}
 .panel-default .panel-heading > div > img {
   max-height: 100%;
   height: 100%;
   width: auto;
+  filter: brightness(100);
+}
+.panel-default .panel.panel-heading {
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 0;
+}
+.panel-default .panel-body {
+  padding: 0 8px;
+}
+.panel-default .panel-body .second-ctn {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+}
+.panel-default .panel-body .second-ctn p {
+  font-size: 18px;
+}
+.panel-default .panel-body .second-ctn > div {
+  flex: 30%;
+  display: flex;
+}
+.panel-default .panel-body .second-ctn .mp-party {
+  justify-content: flex-start;
+}
+.panel-default .panel-body .second-ctn .mp-district {
+  justify-content: center;
+}
+.panel-default .panel-body .second-ctn .mp-mail {
+  justify-content: flex-end;
+}
+.panel-default .panel-body .third-ctn {
+  display: flex;
+  padding: 10px 0;
+}
+.panel-default .panel-body .third-ctn > div {
+  flex-basis: 50%;
+}
+.panel-default .panel-body .third-ctn > div p:last-of-type {
+  margin-top: 15px;
+}
+.panel-default .panel-body .third-ctn p > .office {
+  font-size: 18px;
+}
+.panel-default .panel-body .third-ctn p {
+  font-size: 16px;
+  margin: 0;
 }
 /* Panel Styling - END*/
 /* Panel Styling - END*/

@@ -23,7 +23,7 @@
   <script type="text/template" id="data_template">
 
     <div class="mp-ctn panel panel-default">
-      <div class="panel panel-heading">
+      <div class="panel panel-heading first-ctn">
         <% if (party_name == "NDP") { %>
         <div><img height="22" src="images/ndp-logo.png"/></div>
         <% } %>
@@ -42,34 +42,37 @@
         <span class="mp-name panel-title"><%= name %></span>
       </div>
       <div class="panel-body">
-        <div class="mp-district"><p><strong><%= district_name %></strong></div>
-        <div class="mp-party"><p>
-          <% if (party_name == "NDP") { %>
-          <span><%= party_name %></span>
-          <% } %>
-          <% if (party_name == "Liberal") { %>
-          <span><%= party_name %></span>
-          <% } %>
-          <% if (party_name == "Conservative") { %>
-          <span><%= party_name %></span>
-          <% } %>
-          <% if (party_name == "Green Party") { %>
-          <span><%= party_name %></span>
-          <%}%>
-          <% if (party_name == "Bloc Québécois") { %>
-          <span><%= party_name %></span>
-          <%}%>
-        </p></div>
-        <div class="mp-mail"><p><a href="mailto:<%= email %>"><%= email %></a></p></div>
+        <div class="second-ctn">
+          <div class="mp-party"><p>
+            <% if (party_name == "NDP") { %>
+            <span><%= party_name %></span>
+            <% } %>
+            <% if (party_name == "Liberal") { %>
+            <span><%= party_name %></span>
+            <% } %>
+            <% if (party_name == "Conservative") { %>
+            <span><%= party_name %></span>
+            <% } %>
+            <% if (party_name == "Green Party") { %>
+            <span><%= party_name %></span>
+            <%}%>
+            <% if (party_name == "Bloc Québécois") { %>
+            <span><%= party_name %></span>
+            <%}%>
+          </p></div>
+          <div class="mp-district"><p><%= district_name %></div>
+          <div class="mp-mail"><p><a href="mailto:<%= email %>"><%= email %></a></p></div>
+        </div>
 
-        <div class="mp-info">
+        <div class="mp-info third-ctn">
           <% _.each(offices, function(office){ //Loops through office data %>
-          <p><strong><span class="office"><%= office.type %></span></strong></p>
-          <p><strong>Phone:</strong> <%= office.tel %></p>
-          <p><strong>Fax:</strong> <%= office.fax %></p>
-          <p><strong>Address:</strong> <%= office.postal %></p>
-          <% if (office !== offices[offices.length-1]) { %>
-          <hr>
+          <div>
+            <p><span class="office"><%= office.type %></span></p>
+            <p>Phone: <%= office.tel %></p>
+            <p>Fax: <%= office.fax %></p>
+            <p>Address:<br> <%= office.postal %></p>
+            <% if (office !== offices[offices.length-1]) { %>
+          </div>
           <%}%>
           <% }); %>
         </div>
