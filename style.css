@@ -6732,6 +6732,9 @@ button.close {
     display: none !important;
   }
 }
+body {
+  font-family: 'Raleway', sans-serif;
+}
 section {
   display: block;
   float: none !important;
@@ -6757,3 +6760,40 @@ section {
 td img {
   padding-right: 10px;
 }
+/* Panel Styling */
+/* Panel Styling */
+/* Panel Styling */
+.panel-default {
+  border: 3px solid #d71921;
+}
+.panel-default .panel-heading {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 50px;
+  background: #d71921;
+  color: #ffffff;
+  border-color: #d71921;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.panel-default .panel-heading > div {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  width: auto;
+  max-height: 100%;
+  height: 80%;
+}
+.panel-default .panel-heading > div .panel-title {
+  font-size: 28px;
+  font-weight: 700;
+}
+.panel-default .panel-heading > div > img {
+  max-height: 100%;
+  height: 100%;
+  width: auto;
+}
+/* Panel Styling - END*/
+/* Panel Styling - END*/
+/* Panel Styling - END*/
