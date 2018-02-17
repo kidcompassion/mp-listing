@@ -6733,7 +6733,7 @@ button.close {
   }
 }
 body {
-  font-family: serif;
+  font-family: 'Raleway', serif;
 }
 section {
   display: block;
@@ -6784,7 +6784,7 @@ td img {
 }
 .panel-default .panel-heading > div {
   position: absolute;
-  left: 10px;
+  left: 5px;
   top: 5px;
   width: auto;
   max-height: 100%;
