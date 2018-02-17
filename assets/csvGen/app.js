@@ -12,7 +12,6 @@ app.MemberListCollection = Backbone.Collection.extend({
     type: 'GET',
     parse: function (response) {
         //Where i define how the data looks - models will be mpty unless you return this value
-       console.log(response);
        return response.objects;
     },
      comparator: function(item) { 
@@ -41,23 +40,69 @@ app.MemberListView = Backbone.View.extend({
             success: this.fetchSuccess,
             error: this.fetchError
         });
+        
         var userRiding ='boom';
     },
     events: {
         "change #party-filter" : "requestedParty",
         "focus #riding-filter" : "ridingAutocomplete",
         "click #riding-submit" : "requestedRiding",
+        "click #export-csv"    : "exportData"
 
 
     },
-    fetchSuccess: function (collection, response) {
-
+    fetchSuccess: function (collection, response, rawData) {
         //loop through returned collection
         collection.each(function(model){
             //generate a single member view for each
             memberSingleView = new app.MemberSingleView({model:model});
         });
         return this;
+    },
+    exportData : function(response){
+       
+        var e = document.getElementById('party-filter');
+        var partySelected = e.options[e.selectedIndex].value;
+    
+        if(partySelected != 'Reset'){
+            filteredPartyData = this.collection.where({party_name: partySelected});        
+        } else {
+            filteredPartyData = this.collection.models;
+        }
+        
+        var mpArray = Array();
+
+        filteredPartyData.forEach(function(newArray, index){
+       
+            mpArray[index] = [
+                newArray.attributes.party_name,
+                newArray.attributes.district_name,
+                newArray.attributes.name,
+                newArray.attributes.email,
+            ];
+
+        });
+        var csvContent = "data:text/csv;charset=utf-8," + "\n";
+        var headerRow = ["Party", "Riding", "Name", "Email"] + "\n";
+        csvContent += headerRow;
+        mpArray.forEach(function (infoArraySecondary, index) {
+
+            dataString = infoArraySecondary.join(",");
+            csvContent += index < mpArray.length ? dataString + "\n" : dataString;
+
+        });
+        console.log(csvContent);
+        var encodedUri = encodeURI(csvContent);
+        
+        window.open(encodedUri);
+   
+
+
+ 
+
+
+
+
     },
     requestedParty: function(){
         this.$el.find('.data_row').empty();
@@ -107,7 +152,7 @@ app.MemberListView = Backbone.View.extend({
         //create an array of ridings, so we can populate the autocomplete
         $.each(this.collection.models, function(key, index){
             ridings[key] = index.get('district_name');
-            console.log(index.get('district_name'));
+           // console.log(index.get('district_name'));
         });
         //render the autocomplete
         $( "#riding-filter" ).autocomplete({
