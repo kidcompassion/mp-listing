@@ -6,12 +6,16 @@ app.MemberSingleModel = Backbone.Model.extend({
     }
 });
 
+
+/**
+ * Retrieve and parse the MP data
+ */
 app.MemberListCollection = Backbone.Collection.extend({
     model: app.MemberSingleModel,
     url: 'https://represent.opennorth.ca/representatives/house-of-commons/?limit=400',
     type: 'GET',
     parse: function (response) {
-        //Where i define how the data looks - models will be mpty unless you return this value
+        //Where we define how the data looks - models will be mpty unless you return this value
        return response.objects;
     },
      comparator: function(item) { 
@@ -19,20 +23,26 @@ app.MemberListCollection = Backbone.Collection.extend({
     }
 });
 
+/**
+ * Set up the template for individual MP
+ */
 app.MemberSingleView = Backbone.View.extend({
     el: '.data_row',
     tagName: 'div',
     template: _.template($('#data_template').html()),
     initialize: function(){
         this.render();
-       // console.log(this.$el.find('#party-filter'));
     },
+    // Push the model data into the template
     render: function(){
         this.$el.append(this.template(this.model.attributes));
         return this;
     }
 });
 
+/**
+ * Set up the list view
+ */
 app.MemberListView = Backbone.View.extend({
     el: '.data_container',
     initialize: function(){
@@ -40,17 +50,14 @@ app.MemberListView = Backbone.View.extend({
             success: this.fetchSuccess,
             error: this.fetchError
         });
-        
-        var userRiding ='boom';
     },
+    // 
     events: {
         "change #party-filter" : "requestedParty",
-        "focus #riding-filter" : "ridingAutocomplete",
-        "click #riding-submit" : "requestedRiding",
         "click #export-csv"    : "exportData"
-
-
     },
+
+    // Loops through data and creates the individual MP listings
     fetchSuccess: function (collection, response, rawData) {
         //loop through returned collection
         collection.each(function(model){
@@ -59,6 +66,8 @@ app.MemberListView = Backbone.View.extend({
         });
         return this;
     },
+
+    // Exports the filtered data to a CSV
     exportData : function(response){
        
         var e = document.getElementById('party-filter');
@@ -72,8 +81,7 @@ app.MemberListView = Backbone.View.extend({
         
         var mpArray = Array();
 
-        filteredPartyData.forEach(function(newArray, index){
-       
+        filteredPartyData.forEach(function(newArray, index){       
             mpArray[index] = [
                 newArray.attributes.party_name,
                 newArray.attributes.district_name,
@@ -82,28 +90,23 @@ app.MemberListView = Backbone.View.extend({
             ];
 
         });
+
         var csvContent = "data:text/csv;charset=utf-8," + "\n";
         var headerRow = ["Party", "Riding", "Name", "Email"] + "\n";
         csvContent += headerRow;
+        
         mpArray.forEach(function (infoArraySecondary, index) {
-
             dataString = infoArraySecondary.join(",");
             csvContent += index < mpArray.length ? dataString + "\n" : dataString;
 
         });
-        console.log(csvContent);
+        
         var encodedUri = encodeURI(csvContent);
         
         window.open(encodedUri);
-   
-
-
- 
-
-
-
-
     },
+    
+    // Filter the visible MPs by party
     requestedParty: function(){
         this.$el.find('.data_row').empty();
         var filteredPartyData;
@@ -111,11 +114,8 @@ app.MemberListView = Backbone.View.extend({
         var partySelected = partyFilter.val();
 
         if (partySelected === 'Reset'){
-            //console.log('reset'); 
             filteredPartyData = this.collection.models;
-            //console.log(filteredPartyData);
         } else {
-
             filteredPartyData = this.collection.where({party_name: partySelected});
         }
        
@@ -127,57 +127,14 @@ app.MemberListView = Backbone.View.extend({
         return this;
        
     }, 
-
-    requestedRiding: function(){
-        //Run the selected riding through the collection to get a match
-
-        //If the data-riding attr is set...
-        if($('#riding-filter').is('[data-riding]')){
-            //Clear old data
-            this.$el.find('.data_row').empty();
-            var userRiding = $('#riding-filter').attr('data-riding');
-            //Filter for the desired riding
-            filteredRidingData = this.collection.where({district_name : userRiding});
-            filteredRidingList = new app.MemberListCollection(filteredRidingData);
-            filteredRidingList.each(function(model){
-            //generate a single member view for each
-            memberSingleView = new app.MemberSingleView({model:model});
-        });
-        return this;
-        };
-    },
-           
-   ridingAutocomplete: function(userRiding){     
-        var ridings = new Array;
-        //create an array of ridings, so we can populate the autocomplete
-        $.each(this.collection.models, function(key, index){
-            ridings[key] = index.get('district_name');
-           // console.log(index.get('district_name'));
-        });
-        //render the autocomplete
-        $( "#riding-filter" ).autocomplete({
-           source: ridings,
-        });
-        $( "#riding-filter" ).on( "autocompleteselect", function( event, ui) {
-            userRiding = ui.item.value;
-            //append selected value to field as a data-attribute
-            $('#riding-filter').attr('data-riding', userRiding);
-        } );
-    },
-
-
+    // If there's an error on fetching, return it
     fetchError: function (collection, response) {
         throw new Error("error");
     },
     render: function(){
         return this;
     },
-    addMember: function(member){
-        
-        this.$el.append(memberSingleView.render().el);
-    }
 });
-
 
 var memberSingleModel = new app.MemberSingleModel();
 var memberListCollection = new app.MemberListCollection();
