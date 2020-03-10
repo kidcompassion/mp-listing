@@ -6,7 +6,7 @@ If you are interested in contributing to this project, but are intimidated by Gi
 
 ## To Dos ##
 
-- [ ] Add ability to export user's search as a csv
+- [X] Add ability to export user's search as a csv
 
 - [ ] Add autocomplete text field to let user search by riding
 
